@@ -1,0 +1,16 @@
+ul,li{list-style: none;}
+
+.table > tbody> tr > td{
+    width: 200px; 
+    height: 200px;
+    background: rgb(248, 248, 121);
+}
+
+.table > tbody> tr > td:hover{
+    background : rgb(150, 247, 137);
+}
+
+.number{
+    text-align : center;
+    font-size : 25px;
+}

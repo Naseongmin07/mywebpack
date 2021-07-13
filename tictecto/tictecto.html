@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 시간</title>
+    <link rel="stylesheet" href="./tictecto.css">
+</head>
+<body>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<div id="root"></div>
+<script type="text/babel">
+    /*
+        JSX = javascript + xml
+    */
+    class Table extends React.Component{
+        constructor(props){
+            super(props)
+            this.sum = 0
+        }
+        
+        clearFn = ()=>{
+            let number = document.querySelectorAll('.number')
+            number.forEach(v=>{
+                v.innerHTML == ''
+            })
+        }
+
+
+
+        endcheckFn = ()=>{
+            let end = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+
+            for(let i=0; i< end.length; i++){
+                
+                let v0 = document.getElementById(`${end[i][0]}`)
+                let v1 = document.getElementById(`${end[i][1]}`)
+                let v2 = document.getElementById(`${end[i][2]}`)
+                if(v0.innerHTML==v1.innerHTML==v2.innerHTML){
+                    print(v0.innerHTML, v1.innerHTML, v2.innerHTML)
+                    if(v0.innerHTML == 'o'){
+                        alert('1p가 이겼습니다')
+                        this.clearFn()
+                        return
+                    }
+                    else if(v0.innerHTML == 'x'){
+                        alert('2p가 이겼습니다')
+                        this.clearFn()
+                        return
+                    }
+                }
+            }
+        }
+
+
+
+        onClickFn = (e)=>{
+ 
+            let number = document.querySelectorAll('.number')
+            if(e.target.innerHTML!=''){
+                alert('다른 자리에 두어주세요')
+                return
+            }
+            
+            if(this.sum  % 2 == 0){
+                e.target.innerHTML = 'o'
+            }else{
+                e.target.innerHTML = 'x'
+            }  
+            this.sum += 1
+            this.endcheckFn()
+        }
+
+
+
+        render(){ 
+            return(
+                <>
+                    <table className = "table">
+                        <tbody>
+                            <tr>
+                                <td className = "number" id ="0" onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="1" onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="2" onClick = {this.onClickFn}></td>
+                            </tr>
+                            <tr>
+                                <td className = "number" id ="3" onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="4"onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="5" onClick = {this.onClickFn}></td>
+                            </tr>
+                            <tr>
+                                <td className = "number" id ="6" onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="7" onClick = {this.onClickFn}></td>
+                                <td className = "number" id ="8" onClick = {this.onClickFn}></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </>
+            )
+        }
+    }
+    
+
+
+    ReactDOM.render(
+        <Table />,
+        document.querySelector('#root')
+    )
+
+</script>
+</body>
+</html>
